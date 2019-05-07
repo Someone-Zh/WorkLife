@@ -2,67 +2,67 @@
 *****
 ## 数据类型
 * Number | example: 1,3,1.1  | initialize: n = 5                       
-> Python3 支持 int、float、bool、complex（复数）。 python3整数类型只有int 没有Python中的long
+  > Python3 支持 int、float、bool、complex（复数）。 python3整数类型只有int 没有Python中的long
 
 * String | example: "hellow word" 'xxx'    |     initialize:s = "Stirng"   
-> Python中的字符串用单引号 ' 或双引号 " 括起来，同时使用反斜杠 \ 转义特殊字符。不想转义在字符串前加r。Python中的字符串有两种索引方式，从左往右以0开始，从右往左以-1开始。
+  > Python中的字符串用单引号 ' 或双引号 " 括起来，同时使用反斜杠 \ 转义特殊字符。不想转义在字符串前加r。Python中的字符串有两种索引方式，从左往右以0开始，从右往左以-1开始。
 
 * List |  example: ['abc',123,"cab"]    | initialize : l = ['abc',123,"cab"]
-> 加号 + 是列表连接运算符，星号 * 是重复操作
+  > 加号 + 是列表连接运算符，星号 * 是重复操作
 
 * Tuple | example: ('abc',"cba",123)  |  initialize : t = ('abc',"cba",123)
-> 元组和列表很相似，不同的是元组中的元素不可修改。元组也可以使用+操作符进行拼接。一个元素后面要加逗号‘,’否则括号会被当作运算符使用。
+  > 元组和列表很相似，不同的是元组中的元素不可修改。元组也可以使用+操作符进行拼接。一个元素后面要加逗号‘,’否则括号会被当作运算符使用。
 
 * Set |   example: {'Tom','Rose'}  | initialize : s = {'Tom','Rose'}
-> 空集合的初始化只能用set()而不是{}
+  > 空集合的初始化只能用set()而不是{}
 
 * Dictionary |   example: {"name":"Tom","age":18}  |   initialize : d = {"name":"Tom","age":18} 
-> key 必须唯一 
+  > key 必须唯一 
 
 *****
 ## 算术运算
 * \+      example: 1 + 2 = 3
-> 加法
+  > 加法
 
 * \-      example: 3 - 2 = 1
-> 减法
+  > 减法
 
 * \*      example: 3 * 2 = 6
-> 乘法
+  > 乘法
 
 * /      example: 5 / 3 = 1.6666666666666667,35 / 5 = 7。0
-> 除法会自动装换为浮点数
+  > 除法会自动装换为浮点数
 
 * //      example: 5 // 3 = 1,-5.0 // 3.0 # => -2.0
-> 整除会自动向下取整
+  > 整除会自动向下取整
 
 * %       example: 7 % 3 = 1
-> 模 或取余
+  > 模 或取余
 
 *****
 ## 逻辑运算
 * not     example: not True = False
-> 非
+  > 非
 
 * and      example: True and False = False
-> 与
+  > 与
 
 * or      example: False or True = True
-> 或
+  > 或
 
 ******
 ## 比较运算
 * ==       example: 1 == 1 = true
-> 相等
+  > 相等
 
 * !=       example: 1 != 1 = false
-> 不等
+  > 不等
 
-* >       example: 1 > 10 = False
-> 大于
+* \>       example: 1 > 10 = False
+  > 大于
 
 * <       example: 1 < 10 = True
-> 小于
+  > 小于
 
 ******
 ## 集合操作
@@ -189,8 +189,82 @@ it = iter(list)
 # next()进行迭代
 print(next(it))
 # 把一个类作为一个迭代器使用需要在类中实现两个方法 __iter__() 与 __next__() 。StopIteration 异常用于标识迭代的完成
-
 ```
-
-
-
+* 生成器
+```
+# 使用了 yield 的函数被称为生成器，生成器返回的为迭代器
+def fibonacci(n): # 生成器函数 - 斐波那契
+    a, b, counter = 0, 1, 0
+    while True:
+        if (counter > n): 
+            return
+        yield a
+        a, b = b, a + b
+        counter += 1
+f = fibonacci(10) # f 是一个迭代器，由生成器返回生成
+```
+******
+## 函数
+* 函数
+```
+# 一般格式 return 可以没有
+def 函数名（参数列表）:
+    函数体
+    return 结果
+```
+* 函数参数
+  > 函数参数分 必需参数,关键字参数,默认参数,不定长参数。
+  ```
+  # 必须参数 实际调用必须填写
+  def name(str):
+      ...
+  # 关键字参数
+  def name(str):
+      ...
+  name(str="Tom")
+  # 默认参数
+  def name(str,age=18):
+      ...
+  # 不定长参数 参数会以元组(tuple)的形式导入，存放所有未命名的变量参数。
+  def name(str,*girl):
+      ...
+  # 还有一种不定长参数 参数会以字典的形式导入
+  def name(str,**girl):
+      ...
+  ```
+* 匿名函数
+  ```
+  # lambda 函数的语法只包含一个语句
+  lambda [arg1 [,arg2,.....argn]]:expression
+  
+  ```
+* 作用域
+  > Python 中只有模块（module），类（class）以及函数（def、lambda）才会引入新的作用域，其它的代码块（如 if/elif/else/、try/except、for/while等）是不会引入新的作用域的
+  > L （Local） 局部作用域
+  > E （Enclosing） 闭包函数外的函数中
+  > G （Global） 全局作用域
+  > B （Built-in） 内置作用域（内置函数所在模块的范围）
+  ```
+  g_count = 0  # 全局作用域
+  def outer():
+      o_count = 1  # 闭包函数外的函数中
+      def inner():
+          i_count = 2  # 局部作用域
+  ```
+  > 当内部作用域想修改外部作用域的变量时，就要用到global和nonlocal关键字了。
+  ```
+  # 不使用global则默认是局部变量 不使用全局变量
+  num = 1
+  def fun1():
+      global num  # 需要使用 global 关键字声明
+  # 如果要修改嵌套作用域（enclosing 作用域，外层非全局作用域）中的变量则需要 nonlocal 关键字
+  def outer():
+    num = 10
+    def inner():
+        nonlocal num   # nonlocal关键字声明
+        num = 100
+        print(num)
+    inner()
+    print(num)
+  ```
+  
