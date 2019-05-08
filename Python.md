@@ -361,3 +361,48 @@
             return repr(self.value)
   ```
 ******
+## decorator
+* 函数装饰器
+ > 装饰模式的语法糖
+  ```py
+  # 装饰器模式
+  def log(func):
+      def buildFunc():
+          logging.warn("%s is running" % func.__name__)
+          func()   # 把 foo 当做参数传递进来时，执行func()就相当于执行foo()
+      return buildFunc
+  def foo():
+      print('i am foo')
+
+  foo = log(foo)  # 因为log() 返回的是装饰过的方法  所以foo相当于 buildFunc()
+  foo() 
+  # @语法糖
+  def log(func):
+      def buildFunc():
+        logging.warn("%s is running" % func.__name__)
+        func()   # 把 foo 当做参数传递进来时，执行func()就相当于执行foo()
+        return buildFunc
+  @log
+  def foo():
+      print('i am foo')
+  foo() # 和装饰器模式一样 只是由 @语法糖 帮你完成了  
+  # 带参数的 装饰
+  def log(func):
+      def builcFunc(name):
+          logging.warn("%s is running" % func.__name__)
+          func(name)
+          return buildFunc
+
+  @log
+  def foo(name):
+      print("i am " + name)
+  # 不定个数参数
+  def log(func):
+      def builcFunc(*args,**kvargs):
+          logging.warn("%s is running" % func.__name__)
+          func(name)
+          return buildFunc
+  @log
+  def foo(name,age=None,sex=None):
+      print("i am " + name) 
+  ```
