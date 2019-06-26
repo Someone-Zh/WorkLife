@@ -1,4 +1,6 @@
 # 项目介绍
 ----
 ## Python
-  Python.md 是用来复习一些基本的Python的语法,在日后忘记的时候可以快速复习。
+  Python.md 为Python基础学习笔记。
+## C++
+  C++.md 为阅读C++ Primer Plus（第6版）笔记。
