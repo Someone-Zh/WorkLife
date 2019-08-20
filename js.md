@@ -1,0 +1,2 @@
+## HTTPS 忽略证书
+配置环境变量 NODE_TLS_REJECT_UNAUTHORIZED = 0
