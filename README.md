@@ -1,6 +1,6 @@
-# 项目介绍
+# 工作记录
 ----
-## Python
-  Python.md 为Python基础学习笔记。
-## C++
-  C++.md 为阅读C++ Primer Plus（第6版）笔记。
+## 目录介绍
++ Notes 阅读笔记
++ Record 日常记录
++ Pit 踩坑
