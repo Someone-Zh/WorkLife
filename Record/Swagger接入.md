@@ -5,3 +5,13 @@
 + 在开发初期文档和代码还可以保持一致性，但是多次迭代和更后就会出现代码和文档不一致问题，就要需要消耗资源去维护文档，并且api规范很难维持统一，为了解决这个问题去实现解决方案，当用的人多了就会成为一种规范，而swagger就是这样形成了，他不仅有很好的api规范，而且支持api的文档生成（Swagger UI），客户端代码生成（Swagger Codegen）、api页面编辑（Swagger Editor）、api调试（Swagger Inspector）。
 
 ## 实际接入
++ 接入采用swagger3.0 版本 为当前最新版，包含了老版本的功能和最新的api标准。
++ java的springboot项目直接引入官方start包即可一键配置
+```xml
+<dependency>
+  <groupId>io.springfox</groupId>
+  <artifactId>springfox-boot-starter</artifactId>
+  <version>3.0.0</version>
+</dependency>
+```      
++ 代码配置详见https://springfox.github.io/springfox/docs/current/#springfox-spring-mvc-and-spring-boot
