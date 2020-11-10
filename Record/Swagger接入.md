@@ -15,3 +15,20 @@
 </dependency>
 ```      
 + 代码配置详见https://springfox.github.io/springfox/docs/current/#springfox-spring-mvc-and-spring-boot
+# swager运行流程
+1. 由DocumentationPluginsBootstrapper（springfox.documentation.spring.web.plugins）启动开始，调用AbstractDocumentationPluginsBootstrapper#bootstrapDocumentationPlugins（）
+2. 第一层级由顶层DocumentationPlugin开始遍历所有的文档，每个文档组件从springfox.documentation.spring.web.plugins.AbstractDocumentationPluginsBootstrapper#scanDocumentation扫描文档
+3. 然后走向顺序执行下层遍历ApiListingScannerPlugin 去增强接口列表->OperationModelsProviderPlugin 增强操作模型 ->ApiModelReader 调用（ModelPropertyBuilderPlugin 和ModelBuilderPlugin） ->
+4. ApiOperationReader-> 
+  OperationBuilderPlugin列表：
+  + ResponseBuilderPlugin由列表中的ResponseMessagesReader 调用
+  + ParameterBuilderPlugin 由列表中的OperationParameterReader 调用（正常没问题如果要增强这部分会有小坑）
+  + ResponseBuilderPlugin由列表中的ResponseMessagesReader调用
+  + ExpandedParameterBuilderPlugin 由列表中OperationParameterReader
+5. 结束有ApiListingScanner 最后调用ApiListingBuilderPlugin 
+```
+// 获取项目的接口
+ApiListingReferenceScanResult result = apiListingReferenceScanner.scan(context);
+    ApiListingScanningContext listingContext = new ApiListingScanningContext(context,
+        result.getResourceGroupRequestMappings());
+```
