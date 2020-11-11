@@ -27,8 +27,11 @@
   + ExpandedParameterBuilderPlugin 由列表中OperationParameterReader
 5. 结束有ApiListingScanner 最后调用ApiListingBuilderPlugin 
 ```
-// 获取项目的接口
+// springfox.documentation.spring.web.scanners.ApiDocumentationScanner#scan()
 ApiListingReferenceScanResult result = apiListingReferenceScanner.scan(context);
     ApiListingScanningContext listingContext = new ApiListingScanningContext(context,
         result.getResourceGroupRequestMappings());
 ```
+# 扩展功能
+1. 目标
+ 
